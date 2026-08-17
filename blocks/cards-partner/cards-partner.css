@@ -1,0 +1,98 @@
+/* cards-partner -- Partners "Collaboration drives farmer success" cards.
+   Values extracted from source .featurecontainerblockcomp (Partners section).
+   Renders inside a .section.dark-green (dark green bg, white text). */
+
+.cards-partner > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px 24px;
+}
+
+.cards-partner > ul > li {
+  background: transparent;
+  border: 0;
+}
+
+/* Media / image -- 16:9, fills card width */
+.cards-partner .cards-partner-card-image {
+  line-height: 0;
+}
+
+.cards-partner .cards-partner-card-image img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Card body */
+.cards-partner .cards-partner-card-body {
+  padding: 30px 0 0;
+  color: var(--ptx-white);
+}
+
+/* Title */
+.cards-partner .cards-partner-card-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 34px;
+  color: var(--ptx-white);
+}
+
+/* Orange accent underline beneath the title */
+.cards-partner .cards-partner-card-body h3::after {
+  content: "";
+  display: block;
+  width: 69px;
+  height: 2px;
+  margin: 24px 0 16px;
+  background-color: var(--ptx-button-orange);
+}
+
+/* Description */
+.cards-partner .cards-partner-card-body p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 22.4px;
+  color: var(--ptx-white);
+}
+
+/* Learn More -- plain link styled as a solid green button */
+.cards-partner .cards-partner-card-body p:has(> a:only-child) {
+  margin: 28px 0 0;
+}
+
+.cards-partner.block .cards-partner-card-body a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 13px;
+  border: 2px solid var(--ptx-button-green);
+  border-radius: 4px;
+  background-color: var(--ptx-button-green);
+  color: var(--ptx-white);
+  font-weight: 700;
+  font-size: 14.4px;
+  letter-spacing: 0.288px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.cards-partner.block .cards-partner-card-body a:any-link:hover,
+.cards-partner.block .cards-partner-card-body a:any-link:focus-visible {
+  border-color: var(--ptx-button-green-hover);
+  background-color: var(--ptx-button-green-hover);
+  color: var(--ptx-white);
+  text-decoration: none;
+}
+
+@media (width >= 900px) {
+  .cards-partner > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

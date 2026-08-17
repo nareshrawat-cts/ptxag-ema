@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://www.ptxag.com/us/en.html",
+  "path": "us/en",
+  "timestamp": "2026-08-17T06:03:24.232Z",
+  "title": "English",
+  "template": "homepage",
+  "blocks": [
+    "hero-media",
+    "columns-feature",
+    "columns-feature",
+    "columns-feature",
+    "tabs-grid",
+    "cards-partner",
+    "hero-cta"
+  ]
+}

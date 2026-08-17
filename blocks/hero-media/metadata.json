@@ -1,0 +1,37 @@
+{
+  "variantName": "hero-media",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-08-17T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.ptxag.com/us/en.html",
+    "originPage": "PTx Ag homepage",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "background-media + heading + paragraph + 1 CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "page intro hero with full-bleed background image or video",
+      "landing pages with overlaid heading and CTA"
+    ],
+    "notSuitableFor": [
+      "solid-color CTA banners without background media",
+      "text-only intros"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-17T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "variantName": "cards-partner",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-17T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.ptxag.com/us/en.html",
+    "originPage": "PTx Ag homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "partner",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "grid of items, each image + heading + link(s)",
+    "buttonCount": 0,
+    "imageCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "audience/partner segment grids (Dealers, OEMs, Developers)",
+      "photo-led card grids with title and links"
+    ],
+    "notSuitableFor": [
+      "side-by-side two-column feature layouts (use columns)",
+      "interactive tabbed content"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-17T00:00:00.000Z"
+  }
+}

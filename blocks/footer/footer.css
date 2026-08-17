@@ -1,20 +1,124 @@
+/* stylelint-disable no-descending-specificity */
+
+/* PTx Ag footer — dark-green background, white text */
 footer {
-  background-color: var(--light-color);
+  background-color: var(--ptx-dark-green, #013b27);
+  color: var(--ptx-white, #fff);
   font-size: var(--body-font-size-xs);
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer .footer {
+  max-width: var(--content-max-width, 1440px);
+  margin: 0 auto;
+  padding: 56px 24px 32px;
+}
+
+footer .footer a:any-link {
+  color: var(--ptx-white, #fff);
+  text-decoration: none;
+}
+
+footer .footer a:hover {
+  color: var(--ptx-mint, #51d592);
+  text-decoration: underline;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+/* nav columns */
+footer .footer-nav > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+footer .footer-nav > ul > li > a {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: var(--body-font-size-s);
+}
+
+footer .footer-nav ul ul {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+footer .footer-nav ul ul li {
+  margin: 10px 0;
+}
+
+/* brand + social */
+footer .footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgb(255 255 255 / 20%);
+}
+
+footer .footer-brand img {
+  width: 120px;
+  height: auto;
+}
+
+footer .footer-brand > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+footer .footer-brand > ul img {
+  width: 24px;
+  height: 24px;
+}
+
+footer .footer-brand > ul a:hover {
+  opacity: 0.7;
+}
+
+/* legal bar */
+footer .footer-legal {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgb(255 255 255 / 20%);
+  font-size: 12px;
+}
+
+footer .footer-legal > ul {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+footer .footer-legal p {
+  color: rgb(255 255 255 / 70%);
+  line-height: 1.6;
+}
+
+/* ===== Desktop ===== */
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer .footer {
+    padding: 64px 32px 40px;
+  }
+
+  footer .footer-nav > ul {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
   }
 }

@@ -1,20 +1,41 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
+/**
+ * Fetches the footer fragment HTML.
+ * Local / `aem up` serves /content/footer.plain.html; DA/EDS serves {footerPath}.plain.html.
+ * @param {string} footerPath footer document path without the .plain.html suffix
+ * @returns {Promise<string>} the fragment HTML
+ */
+async function fetchFooter(footerPath) {
+  let resp = await fetch('/content/footer.plain.html');
+  if (!resp.ok) {
+    resp = await fetch(`${footerPath}.plain.html`);
+  }
+  if (!resp.ok) return '';
+  return resp.text();
+}
 
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer as fragment
-  const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-  const fragment = await loadFragment(footerPath);
+  const footerPath = block.dataset.footer || '/content/footer';
+  const html = await fetchFooter(footerPath);
+  if (!html) return;
 
-  // decorate footer DOM
-  block.textContent = '';
   const footer = document.createElement('div');
-  while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+  footer.innerHTML = html;
 
+  // Rewrite relative image paths to the absolute content path so they resolve
+  // regardless of the page URL the footer is rendered on.
+  footer.querySelectorAll('img[src^="images/"]').forEach((img) => {
+    img.setAttribute('src', `/content/${img.getAttribute('src')}`);
+  });
+
+  const sections = [...footer.querySelectorAll(':scope > div')];
+  ['footer-nav', 'footer-brand', 'footer-legal'].forEach((c, i) => {
+    if (sections[i]) sections[i].classList.add(c);
+  });
+
+  block.textContent = '';
   block.append(footer);
 }

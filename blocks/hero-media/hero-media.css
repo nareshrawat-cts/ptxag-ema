@@ -1,0 +1,101 @@
+/* hero-media — full-bleed background media with centered overlaid content.
+   Values extracted from PTx Ag homepage "text-and-asset" hero (viewport 1440). */
+
+/* Full-bleed: escape the section's centered content column. */
+.hero-media-container .hero-media-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-media {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 420px;
+  padding: 64px 24px;
+  overflow: hidden;
+  color: rgb(255 255 255);
+  text-align: center;
+}
+
+/* Background media row: absolutely fills the block behind the content. */
+.hero-media .hero-media-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+}
+
+.hero-media .hero-media-bg picture,
+.hero-media .hero-media-bg img,
+.hero-media .hero-media-bg .hero-media-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Content row sits above the media. */
+.hero-media .hero-media-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1040px;
+}
+
+.hero-media .hero-media-content > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-media h2 {
+  margin: 0 0 24px;
+  line-height: 1;
+  color: rgb(255 255 255);
+}
+
+.hero-media h4 {
+  margin: 0;
+  line-height: 1.15;
+  color: rgb(255 255 255);
+}
+
+.hero-media .button-container {
+  margin: 32px 0 0;
+}
+
+/* CTA: brand primary green button, sized to match source (20px / 16px 32px). */
+.hero-media a.button.primary:any-link {
+  padding: 16px 32px;
+  font-size: 20px;
+  letter-spacing: 0.4px;
+}
+
+/* No background media -> solid page background, dark brand text. */
+.hero-media.no-image {
+  color: var(--text-color);
+}
+
+.hero-media.no-image h2,
+.hero-media.no-image h4 {
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .hero-media {
+    min-height: 660px;
+    padding: 120px 32px;
+  }
+
+  .hero-media h2 {
+    margin-bottom: 32px;
+  }
+}

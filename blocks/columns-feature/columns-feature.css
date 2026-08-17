@@ -1,0 +1,136 @@
+/* Block: columns-feature — two-column feature layout
+ * Two instances share this block:
+ *   1) "Forging a new path" brand intro — text cell + image cell (image LAST)
+ *   2) Resources cards — icon/image cell + text cell (image FIRST), inside .section.neutral-green
+ * Values extracted from source computed styles (see migration-work/columns-feature-extracted.css).
+ */
+
+/* ---------- Base (mobile-first): stacked, image on top ---------- */
+.columns-feature > div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columns-feature img {
+  display: block;
+  width: 100%;
+}
+
+.columns-feature > div > div {
+  order: 1;
+}
+
+.columns-feature > div > .columns-feature-img-col {
+  order: 0;
+}
+
+/* ---------- Shared typography ---------- */
+.columns-feature h2 {
+  font-size: var(--heading-font-size-l); /* 48px desktop / 32px mobile — source 48px */
+  line-height: 1.05;
+  color: var(--text-color); /* #013b27 */
+  margin: 0 0 16px;
+}
+
+.columns-feature h3 {
+  font-size: 34px; /* source */
+  line-height: 1.05;
+  color: var(--ptx-button-green); /* #0c9f50 — source heading green */
+  margin: 0 0 12px;
+}
+
+.columns-feature p {
+  font-size: var(--body-font-size-s); /* 16px — source */
+  line-height: 1.5;
+  color: var(--text-color); /* #013b27 */
+  margin: 0 0 16px;
+}
+
+/* ---------- Links rendered as brand buttons ---------- */
+.columns-feature p:has(a) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.columns-feature a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: var(--ptx-button-green); /* #0c9f50 */
+  color: var(--ptx-white);
+  border: 2px solid var(--ptx-button-green);
+  border-radius: 4px;
+  padding: 16px 32px;
+  font-weight: 700;
+  font-size: 20px; /* source (Forging) */
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.columns-feature a:hover,
+.columns-feature a:focus-visible {
+  background-color: var(--ptx-button-green-hover);
+  border-color: var(--ptx-button-green-hover);
+  color: var(--ptx-white);
+  text-decoration: none;
+}
+
+/* ---------- Resources instance (image cell FIRST) ---------- */
+
+/* Smaller heading text spacing + smaller buttons than the Forging instance */
+.columns-feature > div:has(> .columns-feature-img-col:first-child) p {
+  line-height: 1.4; /* source 22.4/16 */
+  margin: 0 0 28px;
+}
+
+.columns-feature > div:has(> .columns-feature-img-col:first-child) a:any-link {
+  font-size: 14.4px; /* source */
+  padding: 16px 13px;
+}
+
+.columns-feature > div:has(> .columns-feature-img-col:first-child) .columns-feature-img-col img {
+  aspect-ratio: 16 / 9; /* source icon banners are 1920x1080 */
+  object-fit: cover;
+}
+
+/* ---------- Desktop layout ---------- */
+@media (width >= 900px) {
+  /* Forging: text (1fr) + large square graphic (2fr), wide gap, centered */
+  .columns-feature > div:has(> .columns-feature-img-col:last-child) {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 104px;
+    align-items: center;
+  }
+
+  /* Resources: even 50/50 split, no gap, centered */
+  .columns-feature > div:has(> .columns-feature-img-col:first-child) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0;
+    align-items: center;
+  }
+
+  .columns-feature > div:has(> .columns-feature-img-col:last-child) > div,
+  .columns-feature > div:has(> .columns-feature-img-col:first-child) > div {
+    order: unset;
+  }
+
+  /* Resources text cell inset (source 30px 70px) */
+  .columns-feature > div:has(> .columns-feature-img-col:first-child) > div:not(.columns-feature-img-col) {
+    padding: 30px 70px;
+  }
+
+  /* Alternate the second Resources card so its image sits on the right */
+  .columns-feature-wrapper:last-child .columns-feature > div:has(> .columns-feature-img-col:first-child) > .columns-feature-img-col {
+    order: 2;
+  }
+
+  .columns-feature-wrapper:last-child .columns-feature > div:has(> .columns-feature-img-col:first-child) > div:not(.columns-feature-img-col) {
+    order: 1;
+  }
+}

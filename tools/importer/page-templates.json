@@ -1,0 +1,116 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "https://www.ptxag.com/us/en.html"
+      ],
+      "coverageGaps": [],
+      "description": "PTx Ag homepage with hero, brand intro, product tabs, resources feature, partners cards, and dealer CTA",
+      "blocks": [
+        {
+          "name": "hero-media",
+          "instances": [
+            "section.text-and-asset"
+          ]
+        },
+        {
+          "name": "columns-feature",
+          "instances": [
+            ".side-by-side",
+            ".neutral-green-theme .multicolumncomp"
+          ]
+        },
+        {
+          "name": "tabs-grid",
+          "instances": [
+            ".tabs"
+          ]
+        },
+        {
+          "name": "cards-partner",
+          "instances": [
+            ".featurecontainerblockcomp"
+          ]
+        },
+        {
+          "name": "hero-cta",
+          "instances": [
+            ".section-intro"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "rc5",
+          "name": "Hero",
+          "selector": "#maincontent > main.container.responsivegrid.maincontent > div.cmp-container > div.theme-container.container.responsivegrid:nth-of-type(1)",
+          "style": null,
+          "blocks": [
+            "hero-media"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc6",
+          "name": "Brand Intro",
+          "selector": "#maincontent > main.container.responsivegrid.maincontent > div.cmp-container > div.theme-container.container.responsivegrid:nth-of-type(2)",
+          "style": null,
+          "blocks": [
+            "columns-feature"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc7",
+          "name": "Products",
+          "selector": "#maincontent > main.container.responsivegrid.maincontent > div.cmp-container > div.theme-container.container.responsivegrid.dark-green-theme:nth-of-type(3)",
+          "style": "dark-green",
+          "blocks": [
+            "tabs-grid"
+          ],
+          "defaultContent": [
+            ".dark-green-theme:nth-of-type(3) .heading.title"
+          ]
+        },
+        {
+          "id": "rc8",
+          "name": "Resources",
+          "selector": ".theme-container.neutral-green-theme",
+          "style": "neutral-green",
+          "blocks": [
+            "columns-feature"
+          ],
+          "defaultContent": [
+            ".neutral-green-theme .heading.title"
+          ]
+        },
+        {
+          "id": "rc9",
+          "name": "Partners",
+          "selector": "#maincontent > main.container.responsivegrid.maincontent > div.cmp-container > div.theme-container.container.responsivegrid.dark-green-theme:nth-of-type(5)",
+          "style": "dark-green",
+          "blocks": [
+            "cards-partner"
+          ],
+          "defaultContent": [
+            ".dark-green-theme:nth-of-type(5) .heading.title"
+          ]
+        },
+        {
+          "id": "rc10",
+          "name": "Dealer CTA",
+          "selector": ".theme-container.neutral-orange-theme",
+          "style": "neutral-orange",
+          "blocks": [
+            "hero-cta"
+          ],
+          "defaultContent": []
+        }
+      ]
+    }
+  ]
+}
