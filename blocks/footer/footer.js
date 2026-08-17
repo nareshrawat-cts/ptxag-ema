@@ -5,12 +5,16 @@
  * @returns {Promise<string>} the fragment HTML
  */
 async function fetchFooter(footerPath) {
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) {
-    resp = await fetch(`${footerPath}.plain.html`);
-  }
-  if (!resp.ok) return '';
-  return resp.text();
+  // Preview/Live (DA) serve the fragment at the site root (/footer.plain.html);
+  // local `aem up` also serves /content/footer.plain.html. Try root first so the
+  // footer works in every environment, then fall back to the configured path.
+  const candidates = ['/footer.plain.html', `${footerPath}.plain.html`, '/content/footer.plain.html'];
+  return candidates.reduce(async (prev, url) => {
+    const acc = await prev;
+    if (acc) return acc;
+    const resp = await fetch(url);
+    return resp.ok ? resp.text() : '';
+  }, Promise.resolve(''));
 }
 
 /**
@@ -25,10 +29,10 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   footer.innerHTML = html;
 
-  // Rewrite relative image paths to the absolute content path so they resolve
-  // regardless of the page URL the footer is rendered on.
+  // Rewrite relative image paths to a root-absolute path so they resolve
+  // regardless of the page URL, in both local and Preview/Live (DA) environments.
   footer.querySelectorAll('img[src^="images/"]').forEach((img) => {
-    img.setAttribute('src', `/content/${img.getAttribute('src')}`);
+    img.setAttribute('src', `/${img.getAttribute('src')}`);
   });
 
   const sections = [...footer.querySelectorAll(':scope > div')];

@@ -8,12 +8,16 @@ const isDesktop = window.matchMedia('(min-width: 900px)');
  * @returns {Promise<string>} the fragment HTML
  */
 async function fetchNav(navPath) {
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) {
-    resp = await fetch(`${navPath}.plain.html`);
-  }
-  if (!resp.ok) return '';
-  return resp.text();
+  // Preview/Live (DA) serve the fragment at the site root (/nav.plain.html);
+  // local `aem up` also serves /content/nav.plain.html. Try root first so the
+  // header works in every environment, then fall back to the configured path.
+  const candidates = ['/nav.plain.html', `${navPath}.plain.html`, '/content/nav.plain.html'];
+  return candidates.reduce(async (prev, url) => {
+    const acc = await prev;
+    if (acc) return acc;
+    const resp = await fetch(url);
+    return resp.ok ? resp.text() : '';
+  }, Promise.resolve(''));
 }
 
 /**
@@ -99,9 +103,10 @@ export default async function decorate(block) {
   nav.innerHTML = html;
 
   // Nav images use relative `images/...` paths (portable + validation-friendly).
-  // Rewrite to the absolute content path so they resolve regardless of page URL.
+  // Rewrite to a root-absolute path so they resolve regardless of page URL, in
+  // both local (`aem up`) and Preview/Live (DA) environments.
   nav.querySelectorAll('img[src^="images/"]').forEach((img) => {
-    img.setAttribute('src', `/content/${img.getAttribute('src')}`);
+    img.setAttribute('src', `/${img.getAttribute('src')}`);
   });
 
   const sections = [...nav.querySelectorAll(':scope > div')];
