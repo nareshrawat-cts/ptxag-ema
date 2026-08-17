@@ -105,7 +105,7 @@ export default async function decorate(block) {
   });
 
   const sections = [...nav.querySelectorAll(':scope > div')];
-  ['nav-brand', 'nav-sections', 'nav-secondary'].forEach((c, i) => {
+  ['nav-brand', 'nav-sections', 'nav-secondary', 'nav-locale'].forEach((c, i) => {
     if (sections[i]) sections[i].classList.add(c);
   });
 
@@ -118,6 +118,69 @@ export default async function decorate(block) {
     if (topList) topList.classList.add('nav-sections-list');
     navSections.querySelectorAll('li').forEach((li) => decorateDropdown(li, nav));
   }
+
+  // Build the tools group (search + language selector) shown at the top-right
+  // of the primary bar. Content (language options) comes from the nav fragment;
+  // the search input and control markup are created here.
+  const localeSection = nav.querySelector('.nav-locale');
+  const tools = document.createElement('div');
+  tools.className = 'nav-tools';
+
+  // Search: an icon button that toggles an inline input.
+  const search = document.createElement('div');
+  search.className = 'nav-search';
+  search.innerHTML = `
+    <button type="button" class="nav-search-toggle" aria-label="Open search" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="22" height="22">
+        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <form class="nav-search-form" role="search" action="/us/en/search.html">
+      <input type="search" name="q" aria-label="Search" placeholder="Search">
+    </form>`;
+  const searchToggle = search.querySelector('.nav-search-toggle');
+  const searchInput = search.querySelector('input');
+  searchToggle.addEventListener('click', () => {
+    const open = search.classList.toggle('nav-search-open');
+    searchToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) searchInput.focus();
+  });
+  tools.append(search);
+
+  // Language selector: a button showing the current language that toggles the
+  // list of locale links carried in the nav fragment.
+  if (localeSection) {
+    const locale = document.createElement('div');
+    locale.className = 'nav-locale-selector';
+    locale.setAttribute('aria-expanded', 'false');
+    const localeBtn = document.createElement('button');
+    localeBtn.type = 'button';
+    localeBtn.className = 'nav-locale-toggle';
+    localeBtn.setAttribute('aria-label', 'Select your language');
+    localeBtn.innerHTML = `<span class="nav-locale-current">EN</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="20" height="20">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </svg>`;
+    const localeList = localeSection.querySelector('ul');
+    if (localeList) localeList.classList.add('nav-locale-list');
+    locale.append(localeBtn);
+    if (localeList) locale.append(localeList);
+    localeSection.remove();
+
+    localeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = locale.getAttribute('aria-expanded') === 'true';
+      locale.setAttribute('aria-expanded', open ? 'false' : 'true');
+    });
+    document.addEventListener('click', (e) => {
+      if (!locale.contains(e.target)) locale.setAttribute('aria-expanded', 'false');
+    });
+    tools.append(locale);
+  }
+
+  if (navSections) navSections.after(tools);
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
