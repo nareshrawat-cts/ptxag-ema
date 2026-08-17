@@ -1,0 +1,35 @@
+:root {
+  /* Fonts */
+  --heading-font-family: 'PilatWide', 'Lato', sans-serif;
+  --body-font-family: 'Lato', sans-serif;
+
+  /* Brand colors (PTx Ag) */
+  --background-color: #eaf4f0;
+  --text-color: #013b27;
+  --link-color: #013b27;
+  --link-hover-color: #51d592;
+
+  /* Brand palette */
+  --ptx-dark-green: #013b27;
+  --ptx-header-green: #045839;
+  --ptx-light-green: #eaf4f0;
+  --ptx-mint: #51d592;
+  --ptx-neutral-orange: #fef7f0;
+  --ptx-white: #fff;
+  --ptx-button-green: #0c9f50;
+  --ptx-button-green-hover: #0a8544;
+  --ptx-button-orange: #ff6105;
+  --ptx-button-orange-hover: #e05604;
+
+  /* Spacing */
+  --section-padding: 80px;
+  --content-max-width: 1440px;
+
+  /* Heading sizes (desktop) */
+  --heading-size-xxl: 72px;
+  --heading-size-xl: 72px;
+  --heading-size-l: 48px;
+  --heading-size-m: 24px;
+  --heading-size-s: 20px;
+  --heading-size-xs: 16px;
+}

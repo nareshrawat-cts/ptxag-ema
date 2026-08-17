@@ -1,0 +1,169 @@
+/* Block: tabs-grid -- tabbed product switcher with card grid.
+   Values extracted from source computed styles (ptxag.com). */
+
+/* ---- Tablist ---- */
+.tabs-grid .tabs-grid-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0 32px;
+  padding: 1px 1px 10px;
+}
+
+@media (width >= 900px) {
+  .tabs-grid .tabs-grid-list {
+    gap: 32px;
+  }
+}
+
+.tabs-grid .tabs-grid-list button {
+  flex: 0 0 auto;
+  margin: 0;
+  border: 0;
+  border-radius: 4px;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--ptx-white);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+@media (width >= 900px) {
+  .tabs-grid .tabs-grid-list button {
+    font-size: 20px;
+  }
+}
+
+.tabs-grid .tabs-grid-list button p {
+  margin: 0;
+}
+
+.tabs-grid .tabs-grid-list button[aria-selected='true'] {
+  background-color: var(--ptx-white);
+  color: var(--ptx-dark-green);
+  cursor: default;
+}
+
+/* ---- Panel ---- */
+.tabs-grid .tabs-grid-panel {
+  padding: 1px;
+}
+
+.tabs-grid .tabs-grid-panel[aria-hidden='true'] {
+  display: none;
+}
+
+/* ---- Card grid ---- */
+.tabs-grid .tabs-grid-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px 24px;
+  margin: 32px 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (width >= 600px) {
+  .tabs-grid .tabs-grid-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .tabs-grid .tabs-grid-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tabs-grid .tabs-grid-card {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* ---- Card image (16:9) ---- */
+.tabs-grid .tabs-grid-card-image {
+  overflow: hidden;
+}
+
+.tabs-grid .tabs-grid-card-image picture {
+  display: block;
+}
+
+.tabs-grid .tabs-grid-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* ---- Card body ---- */
+.tabs-grid .tabs-grid-card-body {
+  padding: 30px 0;
+}
+
+.tabs-grid .tabs-grid-card-body h3 {
+  margin: 0 0 12px;
+  color: var(--ptx-white);
+  font-family: var(--heading-font-family);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* orange accent underline beneath each card heading */
+.tabs-grid .tabs-grid-card-body h3::after {
+  content: '';
+  display: block;
+  width: 69px;
+  height: 2px;
+  margin-top: 24px;
+  background-color: var(--ptx-button-orange);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.tabs-grid .tabs-grid-card-body p {
+  margin: 0 0 16px;
+  color: var(--ptx-white);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+}
+
+/* description paragraphs (tabs with copy) */
+.tabs-grid .tabs-grid-card-body p:has(a) {
+  margin-bottom: 0;
+}
+
+/* ---- Learn More button (green) ---- */
+.tabs-grid .tabs-grid-card-body a:any-link {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  border: 2px solid var(--ptx-button-green);
+  border-radius: 4px;
+  padding: 16px 13px;
+  background-color: var(--ptx-button-green);
+  color: var(--ptx-white);
+  font-family: var(--heading-font-family);
+  font-size: 14.4px;
+  font-weight: 700;
+  letter-spacing: 0.288px;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.tabs-grid .tabs-grid-card-body a:hover,
+.tabs-grid .tabs-grid-card-body a:focus-visible {
+  border-color: var(--ptx-button-green-hover);
+  background-color: var(--ptx-button-green-hover);
+  color: var(--ptx-white);
+  text-decoration: none;
+}

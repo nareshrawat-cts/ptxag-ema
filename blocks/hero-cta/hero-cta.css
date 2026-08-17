@@ -1,0 +1,85 @@
+/* Block: hero-cta -- CTA banner (centered heading + paragraph + button)
+ * Values extracted from source computed styles (.section-intro on ptxag.com).
+ * Block background stays transparent; the section (.neutral-orange) provides
+ * the background color. */
+
+.hero-cta {
+  padding: 0;
+  background-color: transparent;
+  color: var(--text-color);
+  text-align: center;
+}
+
+/* content wrapper: .hero-cta > div (row) > div (cell) */
+.hero-cta > div > div {
+  max-width: 1215px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.hero-cta h2 {
+  margin: 0 auto 32px;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.hero-cta p {
+  max-width: 848px;
+  margin: 0 auto;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgb(23 28 27);
+  text-align: center;
+}
+
+/* button wrapper paragraph (the standalone link is not buttonized by EDS) */
+.hero-cta p:last-child {
+  margin-top: 40px;
+}
+
+.hero-cta a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  border: 2px solid var(--ptx-button-orange);
+  border-radius: 4px;
+  padding: 16px 32px;
+  background-color: var(--ptx-button-orange);
+  color: var(--ptx-white);
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.4px;
+  text-decoration: none;
+}
+
+.hero-cta a:any-link:hover,
+.hero-cta a:any-link:focus-visible {
+  border-color: var(--ptx-button-orange-hover);
+  background-color: var(--ptx-button-orange-hover);
+  color: var(--ptx-white);
+  text-decoration: none;
+}
+
+@media (width >= 900px) {
+  .hero-cta h2 {
+    line-height: 1;
+  }
+
+  .hero-cta p {
+    font-size: 21px;
+    line-height: 1.5;
+  }
+
+  .hero-cta a:any-link {
+    font-size: 20px;
+  }
+}
