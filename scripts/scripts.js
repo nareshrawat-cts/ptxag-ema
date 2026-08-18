@@ -166,6 +166,23 @@ function appendSource(picture, { type, srcset, media }) {
 
 function renderScene7Picture(src, alt) {
   const picture = document.createElement('picture');
+  // Preserve transparency: if the source asset is requested as png-alpha,
+  // keep PNG output (jpg/webp bake in a white background and lose the alpha
+  // channel). Matches the live site, which serves this image as png-alpha.
+  const isAlpha = /fmt=png-alpha/i.test(src);
+  if (isAlpha) {
+    DM_BREAKPOINTS.forEach((bp) => appendSource(picture, {
+      type: 'image/png',
+      srcset: buildScene7Rendition(src, { width: bp.width, format: 'png-alpha' }),
+      media: bp.media,
+    }));
+    const img = document.createElement('img');
+    img.src = buildScene7Rendition(src, { width: 750, format: 'png-alpha' });
+    img.alt = alt;
+    img.loading = 'lazy';
+    picture.append(img);
+    return picture;
+  }
   DM_BREAKPOINTS.forEach((bp) => appendSource(picture, {
     type: 'image/webp',
     srcset: buildScene7Rendition(src, { width: bp.width, format: 'webp' }),
