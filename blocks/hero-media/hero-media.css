@@ -38,10 +38,11 @@
   object-fit: cover;
 }
 
-/* Video play/pause control — circular, top-right of the hero (matches live). */
+/* Video play/pause control — circular, bottom-right of the hero (clear of the
+   fixed header, which overlaps the hero top). */
 .hero-media .hero-media-toggle {
   position: absolute;
-  top: 24px;
+  bottom: 24px;
   right: 24px;
   z-index: 2;
   display: flex;
