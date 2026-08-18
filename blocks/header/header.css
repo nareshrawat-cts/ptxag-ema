@@ -381,6 +381,13 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
     letter-spacing: 0.3px;
   }
 
+  /* Active (open) top-nav item: mint text + underline, matching live. */
+  header nav .nav-sections-list > li[aria-expanded='true'] > .nav-drop-trigger {
+    color: var(--ptx-mint, #51d592);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+
   header nav .nav-sections-list > li > .nav-drop-toggle {
     position: static;
     width: 0;
