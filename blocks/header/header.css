@@ -16,8 +16,8 @@ header nav {
     'sections sections sections' 1fr / auto 1fr auto;
   align-items: center;
   gap: 0 24px;
-  margin: auto;
-  max-width: var(--content-max-width, 1440px);
+  margin: 0;
+  width: 100%;
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
@@ -213,8 +213,8 @@ header .nav-secondary-band {
 }
 
 header .nav-secondary-band .nav-secondary {
-  max-width: var(--content-max-width, 1440px);
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: 12px 24px;
 }
 
@@ -339,7 +339,7 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
     grid-template: 'brand sections tools' auto / auto 1fr auto;
     align-items: center;
     gap: 0 40px;
-    max-width: var(--content-max-width, 1440px);
+    width: 100%;
     height: 120px;
     padding: 0 40px;
   }
@@ -414,9 +414,8 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
     flex-direction: row;
     gap: 48px;
     width: 100%;
-    max-width: var(--content-max-width, 1440px);
-    margin: 0 auto;
-    padding: 32px 32px 40px;
+    margin: 0;
+    padding: 32px 40px 40px;
     background-color: var(--ptx-white, #fff);
     box-shadow: 0 12px 24px rgb(0 0 0 / 12%);
   }

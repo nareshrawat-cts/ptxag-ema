@@ -77,26 +77,22 @@ function decorateDropdown(li, nav) {
   toggleBtn.setAttribute('aria-label', `Toggle ${trigger ? trigger.textContent.trim() : 'submenu'}`);
   li.insertBefore(toggleBtn, submenu);
 
-  toggleBtn.addEventListener('click', (e) => {
+  const togglePanel = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const open = li.getAttribute('aria-expanded') === 'true';
-    if (isDesktop.matches) closeAllDropdowns(nav);
+    closeAllDropdowns(nav);
     li.setAttribute('aria-expanded', open ? 'false' : 'true');
-  });
+  };
 
-  // Desktop hover opens/closes top-level panels.
+  // Open the panel on CLICK (matches the live site — no hover behavior).
+  toggleBtn.addEventListener('click', togglePanel);
+
+  // Top-level trigger label toggles the panel on click instead of navigating
+  // (the live top-nav labels open the dropdown rather than following the link).
   const isTopLevel = li.parentElement.classList.contains('nav-sections-list');
-  if (isTopLevel) {
-    li.addEventListener('mouseenter', () => {
-      if (isDesktop.matches) {
-        closeAllDropdowns(nav);
-        li.setAttribute('aria-expanded', 'true');
-      }
-    });
-    li.addEventListener('mouseleave', () => {
-      if (isDesktop.matches) li.setAttribute('aria-expanded', 'false');
-    });
+  if (isTopLevel && trigger) {
+    trigger.addEventListener('click', togglePanel);
   }
 }
 
