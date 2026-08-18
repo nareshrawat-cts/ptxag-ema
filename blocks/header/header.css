@@ -358,13 +358,13 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
     grid-area: sections;
     display: block;
     visibility: visible;
-    place-self: center end;
+    place-self: center center;
   }
 
   header nav .nav-sections-list {
     display: flex;
     gap: 24px;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   header nav .nav-sections-list > li {
@@ -404,7 +404,7 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
     transform: rotate(-135deg) translateY(-1px);
   }
 
-  /* megamenu panel — white, full width, below the header */
+  /* megamenu panel — dark green, full width, below the header (matches live) */
   header nav .nav-sections-list > li > ul {
     display: none;
     position: absolute;
@@ -412,12 +412,13 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
     right: 0;
     top: 100%;
     flex-direction: row;
-    gap: 48px;
+    justify-content: center;
+    gap: 64px;
     width: 100%;
     margin: 0;
-    padding: 32px 40px 40px;
-    background-color: var(--ptx-white, #fff);
-    box-shadow: 0 12px 24px rgb(0 0 0 / 12%);
+    padding: 40px 40px 48px;
+    background-color: var(--ptx-dark-green, #013b27);
+    box-shadow: 0 12px 24px rgb(0 0 0 / 25%);
   }
 
   header nav .nav-sections .nav-sections-list > li[aria-expanded='true'] > ul {
@@ -432,7 +433,7 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
   }
 
   header nav .nav-sections-list > li > ul > li > .nav-drop-trigger {
-    color: var(--ptx-dark-green, #013b27);
+    color: var(--ptx-white, #fff);
     font-size: var(--body-font-size-s);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -456,11 +457,11 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
 
   header nav .nav-sections-list > li > ul ul a {
     font-size: var(--body-font-size-xs);
-    color: var(--ptx-dark-green, #013b27);
+    color: var(--ptx-white, #fff);
   }
 
   header nav .nav-sections-list > li > ul ul a:hover {
-    color: var(--ptx-button-green, #0c9f50);
+    color: var(--ptx-mint, #51d592);
   }
 
   /* secondary band always visible on desktop */

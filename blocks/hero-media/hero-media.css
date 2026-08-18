@@ -38,6 +38,30 @@
   object-fit: cover;
 }
 
+/* Video play/pause control — circular, top-right of the hero (matches live). */
+.hero-media .hero-media-toggle {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 40%);
+  color: rgb(255 255 255);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.hero-media .hero-media-toggle:hover {
+  background: rgb(0 0 0 / 60%);
+}
+
 /* Content row sits above the media. */
 .hero-media .hero-media-content {
   position: relative;

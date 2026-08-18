@@ -37,13 +37,14 @@ export default function decorate(block) {
     // autoplay/muted/looping background <video> using the poster as the
     // still frame. Content-driven: no hardcoded per-page markup.
     const posterImg = mediaRow.querySelector('img');
-    const videoMap = {
-      'homepage-bg-video-AVS': 'https://s7mbrstream.scene7.com/is/content/agco/_media_/2a1/2a10b4b8-5c18-4e4f-833f-8daab205ce7f-stream.mp4?utm_medium=fmp4_dash',
-    };
-    const posterSrc = posterImg ? (posterImg.currentSrc || posterImg.src || posterImg.getAttribute('src') || '') : '';
-    const videoKey = Object.keys(videoMap).find((k) => posterSrc.includes(k));
-    if (videoKey) {
-      const posterUrl = `https://s7d9.scene7.com/is/image/agco/${videoKey}?fit=constrain,1&wid=1440&hei=661`;
+    // Ambient background video for the hero. The homepage hero uses the PTx
+    // Scene7 video; the source URL can be overridden per-instance via a
+    // `data-video` attribute on the block. The poster falls back to the
+    // authored image so there is always a still frame.
+    const defaultVideo = 'https://s7mbrstream.scene7.com/is/content/agco/_media_/2a1/2a10b4b8-5c18-4e4f-833f-8daab205ce7f-stream.mp4?utm_medium=fmp4_dash';
+    const videoSrc = block.dataset.video || defaultVideo;
+    if (videoSrc && posterImg) {
+      const posterUrl = posterImg.currentSrc || posterImg.src || posterImg.getAttribute('src') || '';
       const video = document.createElement('video');
       video.className = 'hero-media-video';
       video.autoplay = true;
@@ -52,14 +53,35 @@ export default function decorate(block) {
       video.playsInline = true;
       video.setAttribute('playsinline', '');
       video.setAttribute('aria-hidden', 'true');
-      video.poster = posterUrl;
+      if (posterUrl) video.poster = posterUrl;
       const source = document.createElement('source');
-      source.src = videoMap[videoKey];
+      source.src = videoSrc;
       source.type = 'video/mp4';
       video.append(source);
       const pic = mediaRow.querySelector('picture');
       (pic || posterImg).replaceWith(video);
       video.play?.().catch(() => { /* autoplay may be blocked; poster remains */ });
+
+      // Play/pause control (matches live: circular button, top-right of hero).
+      const playIcon = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>';
+      const pauseIcon = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>';
+      const control = document.createElement('button');
+      control.type = 'button';
+      control.className = 'hero-media-toggle';
+      control.setAttribute('aria-label', 'Pause');
+      control.innerHTML = pauseIcon;
+      control.addEventListener('click', () => {
+        if (video.paused) {
+          video.play?.();
+          control.innerHTML = pauseIcon;
+          control.setAttribute('aria-label', 'Pause');
+        } else {
+          video.pause();
+          control.innerHTML = playIcon;
+          control.setAttribute('aria-label', 'Play');
+        }
+      });
+      block.append(control);
     }
   } else {
     // No background media -> render on a solid background with dark text.
