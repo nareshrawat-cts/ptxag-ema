@@ -55,7 +55,19 @@ function decorateDropdown(li, nav) {
   li.classList.add('nav-drop');
   li.setAttribute('aria-expanded', 'false');
 
-  const trigger = li.querySelector(':scope > a');
+  // The trigger label may be a direct <a> or an <a> wrapped in a <p>
+  // (markdown wraps a sole link in a paragraph). Unwrap the <p> so the
+  // trigger is a direct child of the <li> and the chevron ::after applies.
+  let trigger = li.querySelector(':scope > a');
+  if (!trigger) {
+    const p = li.querySelector(':scope > p');
+    const pLink = p && p.querySelector(':scope > a');
+    if (pLink && p.children.length === 1) {
+      li.insertBefore(pLink, p);
+      p.remove();
+      trigger = pLink;
+    }
+  }
   if (trigger) trigger.classList.add('nav-drop-trigger');
 
   // Toggle button (chevron) — separate click target from the link so the label can navigate.
@@ -218,6 +230,20 @@ export default async function decorate(block) {
   // Move the secondary utility nav out of the constrained primary nav so it can
   // render as a full-width band below the main bar (matches the source header).
   const secondary = nav.querySelector('.nav-secondary');
+  if (secondary) {
+    // Append the circular arrow icon after each secondary link (matches source).
+    secondary.querySelectorAll('li > a').forEach((a) => {
+      if (a.querySelector('.nav-secondary-arrow')) return;
+      const arrow = document.createElement('span');
+      arrow.className = 'nav-secondary-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
+        <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M9 12h6m0 0-2.5-2.5M15 12l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
+      a.append(arrow);
+    });
+  }
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';

@@ -224,17 +224,31 @@ header .nav-secondary-band .nav-secondary ul {
   padding: 0;
   display: flex;
   justify-content: center;
-  gap: 48px;
-  font-size: var(--body-font-size-xs);
+  gap: 80px;
+  font-size: 18px;
   font-weight: 700;
 }
 
 header .nav-secondary-band .nav-secondary a:any-link {
   color: var(--ptx-white, #fff);
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 header .nav-secondary-band .nav-secondary a:hover { color: var(--ptx-mint, #51d592); }
+
+header .nav-secondary-arrow {
+  display: inline-flex;
+  align-items: center;
+}
+
+header .nav-secondary-arrow svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
 
 /* show secondary band inside the mobile drawer too */
 header nav[aria-expanded='true'] ~ .nav-secondary-band { display: block; }
@@ -266,7 +280,16 @@ header nav .nav-locale-toggle {
   color: inherit;
   cursor: pointer;
   font: inherit;
-  font-weight: 700;
+}
+
+header nav .nav-locale-toggle {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+header nav .nav-locale-current {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 header nav .nav-search-form {
@@ -315,10 +338,10 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
     display: grid;
     grid-template: 'brand sections tools' auto / auto 1fr auto;
     align-items: center;
-    gap: 0 32px;
+    gap: 0 40px;
     max-width: var(--content-max-width, 1440px);
-    height: var(--nav-height);
-    padding: 0 32px;
+    height: 120px;
+    padding: 0 40px;
   }
 
   header nav[aria-expanded='true'] {
@@ -328,7 +351,7 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
 
   header nav .nav-brand { align-self: center; }
 
-  header nav .nav-brand img { width: 140px; }
+  header nav .nav-brand img { width: 150px; }
 
   /* main nav row — centered/right of logo */
   header nav .nav-sections {
@@ -340,15 +363,22 @@ header nav .nav-locale-list a { font-size: var(--body-font-size-xs); }
 
   header nav .nav-sections-list {
     display: flex;
-    gap: 32px;
+    gap: 24px;
     justify-content: flex-end;
   }
 
   header nav .nav-sections-list > li {
     font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.3px;
     border: 0;
     padding: 8px 0;
     position: static;
+  }
+
+  header nav .nav-sections-list > li > .nav-drop-trigger {
+    font-size: 18px;
+    letter-spacing: 0.3px;
   }
 
   header nav .nav-sections-list > li > .nav-drop-toggle {
