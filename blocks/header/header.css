@@ -43,6 +43,19 @@ header nav a:any-link {
   text-decoration: none;
 }
 
+/* Suppress the mouse-click focus box on nav triggers/buttons (matches live).
+   Keyboard users still get a visible ring via :focus-visible. */
+header nav a:focus,
+header nav button:focus {
+  outline: none;
+}
+
+header nav a:focus-visible,
+header nav button:focus-visible {
+  outline: 2px solid var(--ptx-mint, #51d592);
+  outline-offset: 2px;
+}
+
 /* hamburger */
 header nav .nav-hamburger {
   grid-area: hamburger;
